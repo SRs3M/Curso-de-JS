@@ -1,0 +1,139 @@
+=========================================
+  CURSO JAVASCRIPT - OPERADORES
+=========================================
+
+
+-------------------------------------------
+>> 01-aritmeticos.js
+-------------------------------------------
+let a = 5;
+let b = 7;
+
+// console.log(a + b, "Adición");
+// console.log(a - b, "Sustracción");
+// console.log(a * b, "Multiplicación");
+// console.log(a / b, "División");
+// console.log(a % b, "Módulo");
+// console.log(a ** b, "Potencia");
+
+// incrementar
+console.log(++a); // Incrementa el valor y luego lo imprime
+console.log(a++); // Incrementa el valor nada más
+console.log(a); // Despues del a++. Subio el valor e imprimimos su nuevo valor
+
+// decrementar
+console.log(--a); // Lo mismo pero con resta
+console.log(a--);
+console.log(a);
+
+-------------------------------------------
+>> 02-asignacion.js
+-------------------------------------------
+let a = 5;
+// a = a + 5;
+a += 5; // lo mismo de arriba pero mas corto
+a -= 5;
+a *= 5;
+a /= 5;
+a %= 5;
+a **= 5;
+
+console.log(a);
+
+-------------------------------------------
+>> 03-comparacion.js
+-------------------------------------------
+let a = 10;
+
+// Operadores deRelacionales
+console.log(a > 5); // si es mayor
+console.log(a >= 5); // si es mayor o igual
+console.log(a < 5); // si es menor
+console.log(a <= 5); // si es menor o igual
+
+// Operadores de Igualdad
+console.log(a == 10); // si a es igual a 10
+console.log(a != 10); // si a es diferente a 10
+console.log(a == "10"); // con == pregunta si el valor es igual y no el tipo de dato
+console.log(a === 10); // preguntar si es igual el valor y tipo de dato
+console.log(a !== 10); // preguntar si es diferente el valor y el tipo de dato
+
+-------------------------------------------
+>> 04-logicos.js
+-------------------------------------------
+// Los operadores lógicos son AND, OR, NOT
+
+// AND (&&)
+let mayor = false;
+let suscrito = true;
+// console.log(true && true); // el AND revisa si TODOS los condicionales son verdaderos
+// console.log(false && true); // Si un condicional es false con AND, se devuelve false
+console.log("AND ", mayor && suscrito);
+
+// OR (||)
+console.log("OR ", mayor || suscrito); // el OR revisa si un solo condicional es verdadero. Aunque el resto sea false y uno sea true. Este devolvera true
+
+// NOT (!)
+console.log("NOT ", !mayor); // el NOT revisa si un condicional es falso. Si en este caso, el condicional es falso. Este devuelve true
+let soloCatalogoInfantil = !mayor; // ej
+
+
+
+-------------------------------------------
+>> 05-falsy.js
+-------------------------------------------
+// short-circuit
+
+// ---TERMINAL CODE---
+/*[] || {}
+· []
+{} && []
+ · {}*/
+ // devuelve el primer valor si todo es true. Devuelve el segundo valor de resto
+
+// Falso. Lo devuelven los false, 0, "", null, undefined, NaN. Estos valores son conocidos como falsy
+let nombre = "Chanchito feliz";
+let username = nombre || "Annonymous";
+console.log(username)
+
+-------------------------------------------
+>> 06-bitwise.js
+-------------------------------------------
+// Decimal : 0 1 2 3 4 5 6 7 8 9
+// Binario : 0 1
+// bit: 0 1
+// Byte: 8 bits
+// Byte 0000 0000 -> 0
+// Byte 0000 0001 -> 1
+// Byte 0000 0010 -> 2
+// Byte 0000 0011 -> 3
+// Byte 0000 0100 -> 4
+// Byte 0000 0101 -> 5
+// Byte 0000 0110 -> 6
+// Byte 0000 0111 -> 7
+
+console.log(1 | 3);
+console.log(1 | 4);
+console.log(3 | 5);
+
+console.log(1 & 3);
+console.log(1 & 4); 
+console.log(3 & 5);
+
+-------------------------------------------
+>> 07-orden.js
+-------------------------------------------
+// let resultado = 8/2*(2+2); // PEMDAS
+let resultado = 8/(2*(2+2))
+console.log(resultado)
+
+-------------------------------------------
+>> 08-ternario.js
+-------------------------------------------
+// expresión ? es como un if
+
+let edad = 25;
+edad = 16;
+let acceso = edad > 17 ? "Permitir ingreso" : "Denegar ingreso"; // si es mayor de 17 permite ingreso, si no no puede ingresar
+
+console.log(acceso);

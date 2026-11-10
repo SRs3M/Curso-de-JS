@@ -1,0 +1,428 @@
+=========================================
+  CURSO JAVASCRIPT - OBJETOS
+  Resumen de archivos de práctica
+=========================================
+
+
+-------------------------------------------
+>> 01-intro.js
+-------------------------------------------
+// Como todas estas variables se relacionan, se pueden poner en un objeto
+let email = "nico@holamundo.io";
+let name = "Nicolas";
+let direccion = {
+    calle: "Queen St",
+    numero: 15,
+}
+
+// le podemos asignar variables y funciones
+user = {
+    email : "nico@holamundo.io",
+    name : "nicolas",
+    direccion: {
+        calle: "Queen St",
+        numero: 15,
+    },
+    activo: true,
+    recuperarClave: function() { // Una función sin nombre se conoce como función anónima
+        console.log("recuperando clave...");
+    }
+};
+
+/** 
+ * A este estilo de programación donde tomamos datos que se relacionan entre si se le conoce como POO
+ * Programación
+ * Orientada a
+ * Objetos
+ * 
+ * o en inglés:
+ * Object
+ * Oriented
+ * Programming
+ */
+
+-------------------------------------------
+>> 02-dinamico.js
+-------------------------------------------
+// En JS los objetos son dinámicos, es decir, que les podemos agregar o quitar propiedades a nuestro antojo y cambiar su valor en cualquier momento
+
+// Como esto es una constante, no podremos cambiar su valor, ¿O no?
+const user = { id:1 }; // Si un objeto tiene pocas propiedades, esta bien colocarlo en una sola línea
+// const user = 1; // Esto no se puede hacer ya que estamos cambiandole el valor.. Pero si podemos agregarle propiedades
+user.name = "nicolas"; 
+user.guardar = function() {
+    console.log("guardando", user.name);
+}
+
+user.guardar();
+
+delete user.name; //Eliminar propiedades
+delete user.guardar;
+console.log(user)
+
+// SI queremos que no se pueda modificar
+const user1 = Object.freeze({ id:1 }); // No le podremos cambiar ni sus propiedade ni sus valores
+user1.name = "nico";
+user1.id = 2;
+console.log(user1);
+const user2 = Object.seal({ id:1 }); // No le podremos cambiar sus valores pero si podemos agregar propiedades
+user2.name = "nico";
+user2.id = 2;
+console.log(user2);
+
+-------------------------------------------
+>> 03-factory.js
+-------------------------------------------
+// Las factory nos permiten crear objetos de una manera sencilla y no repetitiva. Si queremos crear miles o millones de usuarios sin hacer lo mismo cada vez
+// let user = {
+//     id: 1,
+//     email: "nico@holamundo.io",
+//     name: "nicolas",
+//     activo: true,
+//     recuperarClave = function() {
+//         console.log("recuperando clave...");
+//     }
+// };
+
+function crearUsuario(name, email) { // Tiene que ser camelCase y generalmente empiezan con "create" o "crear"
+    return {
+        id: 1,
+        email: email,
+        name, // esto es exactamente igual que hacer name: name
+        activo: true,
+        recuperarClave: function() {
+            console.log("recuperando clave...");
+        },
+    };
+}
+
+let user1 = new crearUsuario("Nicolas", "nico@holamundo.io");
+let user2 = new crearUsuario("Felipe", "felipe@holamundo.io");
+
+console.log(user1, user2);
+
+-------------------------------------------
+>> 04-constructor.js
+-------------------------------------------
+// Crear un { id: 1, recuperarclave: function(){} };
+function Usuario() { // El nombre que le daremos es del recurso que queremos crear en UpperCamelCase
+    this.id = 1;
+    this.recuperarClave = function() { // Método (Una función asignada a una propiedad de un objeto)
+        console.log("Recuperando clave...");
+    }
+}
+
+let usuario = new Usuario;
+/** Para crear una variable utilizando el método (Usuario) debemos poner "new", la cual:
+ * 1. Creara un objeto literal del aire {}
+ * 2. Se vincula el prototipo de la función (En este caso usuario) con la función que se acaba de vincular
+ * 3. Este objeto vacio se le asigna a "this." ( Por ende, this = {} )
+ * 4. Si esta función de Usuario no retorna nada, retornará de manera automatica "this."
+ */
+
+-------------------------------------------
+>> 05-atajos.js
+-------------------------------------------
+// NO son atajos de teclado xd
+let obj = {}; // Esto es un atajo para crear un objeto
+let obj2 = new Object;
+/**
+ * Se pueden crear:
+ * New Array(); []
+ * new String(); "" '' 
+ * new Number(); 123
+ * new Boolean(); true / false
+ */
+// ¿Qué constructor tendrá un objeto que creemos con una función constructora?
+function Usuario() {
+    this.name = "Chanchito";
+}
+
+let user = new Usuario();
+console.log(Usuario);
+// El typeof de un constructor de variable, será object
+// Los string, number y boolean constructores se comportan diferente a los literales
+
+const s1 = "1 + 1";
+const s2 = new String("1 + 1");
+console.log(eval(s1), eval(s2)); // s2 = String('1 + 1')
+// Sempre usa los strings literales
+console.log(s2.valueOf); // Ver el valor de una variable constructora como una literal
+
+-------------------------------------------
+>> 06-funciones.js
+-------------------------------------------
+// Las funciones también son objetos, y se le consideran objetos de primera clase, osea, una función puede ser asignada a otras variables, pasadas como argumentos a otras funciones y ser retornadas de otras funciones
+function Usuario(nombre) {
+    this.nombre = nombre;
+}
+
+console.log(Usuario.name); // Nos retornara el nombre de la función
+console.log(Usuario.length); // Nos retornara la cantidad de argumentos que recibe una función
+
+const U = Usuario;
+let user = new U("nicolas");
+
+console.log(user);
+
+function of(Fn, arg) {
+    return new Fn(arg);
+}
+
+let user1 = of(Usuario, "Chanchito");
+console.log(user1);
+
+function returned() {
+    return function() {
+        console.log("Hola mudno");
+    }
+}
+
+let saludo = returned();
+
+-------------------------------------------
+>> 07-Function.js
+-------------------------------------------
+function Punto(x, y) {
+    this.x = x;
+    this.y = y;
+    this.dibujar = function() { console.log("Dibujando"); }
+}
+
+let punto = { z: 7};
+// Punto.call(punto, 1, 2); // El contexto de this, los argumentos (tmb nuevos argumentos);
+Punto.apply(punto, [1, 2]) // El contexto de this, [los argumentos]
+console.log(punto);
+
+// - No lo use - //
+// const Point = new Function("x", "y", `
+//     this.x = x;
+//     this.y = y;
+//     this.dibujar = function() { console.log("Dibujando"); }
+// `);
+
+// const p = new Point(1, 2);
+// console.log(p);
+
+-------------------------------------------
+>> 08-referencia.js
+-------------------------------------------
+// cuando se define una variable, JS cogera un bloque de memoria y le asignara ese valor de la variable. Pero si creamos un objeto, No se guarda el objeto sino que se guarda la dirección de donde se encuentra el objeto. Asi que aunque tengamos dos objetos totalmente iguales, si hacemos la triple igualdad (a = {}, b = {}, a === b) nos retornara falso, ya que tienen diferentes direcciónes. Pero si queremos que asigne true, deberemos asignar (a = {}, b = a) lo cual definira la misma dirección
+
+let a = 1;
+let b = a;
+b++;
+console.log(a, b); // 1, 2
+
+let x = {};
+let y = x;
+b.prop = 1;
+console.log(x, y); // {}, {}
+
+let n = 1;
+function suma(n) { // Cuando creamos un parametro, JS crea una variable especial para ese parametro. Por eso este n es diferente a la variable de n
+    n++;
+}
+
+suma(n);
+console.log(n); // 1
+
+let j = { prop: 1 }
+function addition(i) {
+    i.prop++;
+}
+
+addition(j);
+console.log(j); // {prop:2}
+
+
+-------------------------------------------
+>> 09-list-props.js
+-------------------------------------------
+// JS es un lenguaje dinamico, es decir que a los objetos se le pueden agregar o quitar propiedades con tan solo instruirselo. Esto puede presentar un problema si queremos acceder a una propiedad que se haya eliminado. Asi que asi se listan las propiedades de un objeto
+const punto = {
+    x: 10,
+    y: 15,
+    dibujar() { // dibujar : function() {}
+        console.log("dibujando");
+    }
+}
+
+// delete punto.dibujar;
+if("dibujar" in punto){ 
+    punto.dibujar();
+} else {
+    console.log("error404")
+}
+
+// console.log(Object.keys(punto)); // listar las propiedades de un objeto
+for(let llave of Object.keys(punto)) {
+    console.log(llave, punto[llave]);
+}
+
+for(let entry of Object.entries(punto)) {
+    console.log(entry); // [propiedad : valor]
+}
+
+for(let llave in punto) {
+    console.log(llave, punto[llave]);
+}
+
+-------------------------------------------
+>> 10-clones.js
+-------------------------------------------
+let punto = {
+    x: 10,
+    y: 15,
+};
+
+// clonar un objeto dentro de otro objeto
+let referencia = Object.assign(punto, { z:20, x: 1 });
+let clonePunto = Object.assign({}, punto, { z:20, x: 1 }); // Assign permite asignar las propiedades que estan a la derecha a objetos de la izquierda. Toma los valores de mas a la derecha (Osea si le agregamos un objeto que ya existe, se reemplazaran)
+// console.log(punto, clonePunto);
+console.log(referencia);
+
+// copiar algo perfectamente
+let copiaPunto = Object.assign({}, punto);
+console.log(copiaPunto, punto);
+
+// Un metodo mas nuevo //
+let copia3 = { ...punto } // Vamos a crear un objeto literal y luego las propieaddes de punto se le van a asignar a este objeto literal
+console.log(copia3);
+
+// forma antigua
+let copia4 = {};
+for(let llave in punto) {
+    copia4[llave] = punto[llave];
+}
+console.log(copia4);
+
+-------------------------------------------
+>> 11-private-public.js
+-------------------------------------------
+// privado significa que no podra ser usado desde afuera
+function Usuario() {
+    this.name = "Nicolas";
+    let id = 1;
+
+    let log = function() { // simplemente no ponga this. y asi no se podra acceder desde el exterior
+        console.log("logging");
+    }
+    
+    this.guardar = function() {
+        log();
+        console.log("guardando");
+    }
+}
+
+const usuario = new Usuario();
+usuario.log = function() {
+    console.log("lala");
+}
+usuario.guardar();
+
+-------------------------------------------
+>> 12-math.js
+-------------------------------------------
+console.log(
+    Math.PI, // 3,1415...
+    Math.abs(-15), // El valor absoluto (15)
+    Math.round(15.5), // Redondear numeros (16)
+    Math.round(15.4), // (14)
+    Math.floor(15.9), // Redondea hacia abajo (15)
+    Math.ceil(15.01), // Redondea hacia arriba (16)
+    Math.pow(2, 3), // Potencia (Base, exponente)
+    Math.sqrt(9), // Raiz cuadrada
+);
+
+console.log(Math.random()); // Numero pseudoaleatorio entre 0 - 1
+// Random entre mas rangos
+function getRandom(min, max) {
+    return Math.random() * (max - min);
+}
+console.log(getRandom(10, 1));
+
+-------------------------------------------
+>> 13-date.js
+-------------------------------------------
+const now = new Date(); // Cuando llamamos a Date y creamos a un nuevo objeto con "new", estamos creandolo con la fecha actual que tiene nuestra maquina actual
+console.log(now);
+// Crear una fecha en específico
+const fecha = new Date("December 11 1986 14:15 GMT-0300"); // El string debe tener un formato de fecha EstadoUnidense (M/D/A/00:00/ZHR)
+const fecha2 = new Date(1986, 11, 25, 14, 15); // año, mes (base 0), día, hora, minutos, seg, miliseg
+// Cambiar el GMT sumando el GTM al GMT ya existente
+console.log(fecha2);
+const fecha3 = new Date(1986, 11, 25, 14+12, 15);
+console.log(fecha3);
+// Fechas internacionales
+console.log("datestring", fecha3.toDateString()) // Fri Dec 26 2986
+console.log("ISOString", fecha3.toISOString()) // Para mandar fechas desde el cliente al servidor, usa este
+console.log("timestring", fecha3.toTimeString()) // 02:15:00 GMT-0500
+
+fecha3.getDate(); // Obtener el día mes año
+fecha3.getDay(); // Obtener el día de la semana
+fecha3.getFullYear(); // El año completo
+fecha3.getHours(); // La hora
+fecha3.getMilliseconds(); // Los milisegundos
+fecha3.getMinutes(); // Los minutos
+fecha3.getMonth(); // El mes
+
+fecha3.setFullYear(1978); // Cambiar un valor. el set tiene todos los tipos anteriores
+console.log(fecha3);
+
+-------------------------------------------
+>> 14-string.js
+-------------------------------------------
+const saludo = "Hola Mundo!";
+//              0123456
+const despedida = new String("Chao Mundo :(");
+console.log(typeof saludo, typeof despedida); // String, Object
+
+console.log(saludo.length); // Devuelve el largo del String
+console.log(saludo.indexOf("Mu")); // Devuelve el índice de donde se encuentra en el otro string
+console.log(saludo.indexOf("aeou")); // -1 devolverá si no está en el string
+console.log(saludo.includes(" Mundo")) // Devuelve true o false
+console.log(saludo.replace("Mundo", "Nicolas"), saludo) // Parte a ser reemplazada, Con qúe se reemplazara
+let nuevoSaludo = saludo.replace("Mundo", "Nicolas"); // Para guardarse, debe ser asi
+console.log(saludo.toLowerCase()); // Todo a minusculas
+console.log(saludo.toUpperCase()); // Todo a mayusculas
+console.log(saludo.substring(0, 4)); // Índice de inicio, índice final pero el índice final no incluye el caracter final. Sirve para recortar
+console.log(saludo.substr(2, 4)); // Deprecado
+
+const espacios = "    Hola     Mundo!";
+console.log(espacios.trim()); // Recorta los espacios de un String
+console.log(espacios.trimEnd()); // Recorta todos los espacios a la derecha
+console.log(espacios.trimStart()); // Recorta todos los espacios a la izquierda
+
+-------------------------------------------
+>> 15-escape.js
+-------------------------------------------
+// Como agregar caracteres especiales en un String
+const saludo = "Hola \\Mundo! \nbienvendios a\t \"Ultimate Javascript\"";
+/** Caracteres de Escape
+ * \n Nueva linea
+ * \t Tabulación
+ * \' Comilla simple
+ * \" Comilla doble
+ * \\ Backslash
+ */
+console.log(saludo);
+
+-------------------------------------------
+>> 16-template.js
+-------------------------------------------
+// Una mejor forma para poner caracteres especiales en strings
+const saludo  ="Hola Mundo! \nbienv\"en\'idos\t a ult\\imate javascript :)"; // Se ve muy feo
+
+// Empleamos backticks para un template string (Tambien podemos poner variables en ellos)
+const nombre = "Pepe"
+const apellido = "Roberto"
+const nombreCompleto = nombre + " " + apellido
+// Podemos llamar variables, funciones, expresiones matemáticas y se pueden hacer funciones
+function plantilla(nombre) {
+    return `Hola ${nombreCompleto}!
+Bienvenidos a "Ultimate Javascript ${1+1}"
+
+Cariños ${nombre}`;
+}
+console.log(plantilla("Pepelin"))

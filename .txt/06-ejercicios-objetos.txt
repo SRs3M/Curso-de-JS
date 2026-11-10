@@ -1,0 +1,146 @@
+=========================================
+  CURSO JAVASCRIPT - EJERCICIOS (OBJETOS)
+=========================================
+
+
+-------------------------------------------
+>> Ejercicio 01.js
+-------------------------------------------
+// Crear un usuario con nombre y un ID random
+function Usuario(name) {
+    this.id = Math.random();
+    this.name = name;
+}
+
+let user = new Usuario("Felipe");
+let user2 = new Usuario("Chanchito");
+console.log(user, user2)
+
+-------------------------------------------
+>> Ejercicio 02.js
+-------------------------------------------
+// Hacer un usuario con nombre y un ID random, pero con las Factory Function
+function crearUsuario(name) {
+    return {
+        name,
+        id : Math.random(),
+    };
+}
+
+let user = crearUsuario("Felipe");
+let user2 = crearUsuario("Chanchito");
+console.log(user, user2);
+
+-------------------------------------------
+>> Ejercicio 03.js
+-------------------------------------------
+// Construir una funcion que permite sabes si dos objetos son similares y se debe saber si tienen las mismas propiedades y si estas propiedades tienen los mismos valores
+function similares(obj1, obj2) {
+    // Asumir que los dos objetos son iguales en tamaño
+    // let distintos = false;
+    // for(let llave in obj1) {
+    //     if(obj1[llave] !== obj2[llave]) {
+    //         distintos = true;
+    //     }     
+    // }
+    // return !distintos;
+    
+    // MI codigo revisa si tienen la misma longitud
+    if(Object.keys(obj1).length !== Object.keys(obj2).length) {
+        return false;
+    }
+    for(let prop in obj1) { // Compararemos obj1 con obj2
+            if(obj1[prop] === obj2[prop]){
+                // bien, siga
+            } else {
+                return false;
+            }
+        }
+        return true;
+}
+let resultado = similares(
+    { id: 1, name:"Nico"},
+    { id: 1, name:"Nico"},
+);
+
+console.log(resultado)
+
+-------------------------------------------
+>> Ejercicio 04.js
+-------------------------------------------
+// Construir una función que permite determinar cuales propiedades de un objeto son métodos (funciones en un objeto)
+let objeto = {
+    id: 1,
+    name: "chanchito",
+    login: function(){},
+    logout: function(){},
+};
+
+function cualesMetodos(obj) {
+    for(let prop in obj){
+        if(typeof obj[prop] === "function") {
+            console.log(prop);
+        }
+    }
+}
+cualesMetodos(objeto)
+
+-------------------------------------------
+>> Ejercicio 05.js
+-------------------------------------------
+// Crear una funcion que evalua si un objeto tiene una funcion en particular y si la propiedad contiene el valor de false, devolera true
+let objeto = {
+    id: 1,
+    name: false,
+    login: function(){},
+    logout: function(){},
+};
+
+let propiedad = "name"
+
+function tieneProp(obj, propiedad) {
+    // let props = Object.keys(obj);
+    // for(let prop of props) {
+    //     if(propiedad == prop) {
+    //         return true;
+    //     }
+    // }
+    // return false;
+    if(propiedad in obj){
+        return true;
+    }
+    return false;
+}
+console.log(tieneProp(objeto, propiedad));
+
+-------------------------------------------
+>> Ejercicio 06.js
+-------------------------------------------
+// sin usar "..." ni "Object.assign" y tampoco ninguna función que venga en JS para hacer copias: una función que devuelva la copia de un objeto
+let obj1 = {id:1, name: "chanchito"};
+function crearCopia(obj) {
+    copiaObjeto = {};
+    for(let item in obj) {
+        copiaObjeto[item] = obj[item];
+    }
+    return copiaObjeto;
+}
+
+let obj2 = crearCopia(obj1);
+console.log(obj1, obj2)
+
+-------------------------------------------
+>> Ejercicio 07.js
+-------------------------------------------
+// Agregar un ID aleatorio a un objeto
+let objeto = {name: "Nicolas"};
+
+function agregarId(obj){
+    if(typeof obj == "object"){
+        obj.id = Math.random();
+    }
+    return obj;
+}
+
+agregarId(objeto);
+console.log(objeto);

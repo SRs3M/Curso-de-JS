@@ -1,0 +1,180 @@
+=========================================
+  CURSO JAVASCRIPT - CONTROL DE FLUJO
+=========================================
+
+
+-------------------------------------------
+>> 01-if.js
+-------------------------------------------
+let edad = 15;
+// Un condicional
+if (edad > 17) {
+    console.log("Usuario mayor de edad");
+}
+
+-------------------------------------------
+>> 02-else.js
+-------------------------------------------
+let edad = 10;
+
+// SI esto se cumple
+if (edad > 17) {
+    console.log("Usuario mayor de edad"); // Ejecutar esto
+
+} else if(edad > 13) { // SI lo de arriba no PERO esto si
+    console.log("Usuario necesita estar acompañado de los acudientes"); // ejecutar esto
+
+} else { // SI no
+    console.log("No puede ingresar"); // entonces esto
+}
+
+console.log("a")
+
+-------------------------------------------
+>> 03-while.js
+-------------------------------------------
+// Un loop que calcula los numeros pares
+
+let i = 0;
+// si condicion se cumple
+while (i < 10) {
+    if (i % 2 == 0) {
+        console.log("Número par", i);
+    }
+    console.log(i); // ejecutar hasta que no se cumpla condición
+    i++;
+}
+
+console.log("Fuera del while")
+
+-------------------------------------------
+>> 04-loop-infinito.js
+-------------------------------------------
+let i = 0;
+while (i < 10) {
+    console.log(i);
+    i++; // para ver el loop infinito, comentar esta línea
+}
+
+-------------------------------------------
+>> 05-do-while.js
+-------------------------------------------
+let i = 2;
+
+// while (i < 10) { // si condicion se cumple
+//     if (i % 2 == 0) {
+//         console.log("Número par", i);
+//     }
+//     console.log(i); // ejecutar hasta que no se cumpla condición
+//     i++;
+// }
+
+do { // primero se ejecuta el do
+    if(i % 2 == 0){
+        console.log("numero par", i);
+    }
+    i++
+} while (i < 2); // y luego evalua el while
+
+-------------------------------------------
+>> 06-for.js
+-------------------------------------------
+// let i = 2;
+// while(i < 2) {
+//     if (i % 2 == 0) {
+//         console.log("Número par", i);
+//     }
+//     i++;
+// }
+
+// inicialización de la variable, comparación, preguntar algo, algo al terminar se debe poner para correr el for y para salir del loop
+// la variable, la acción y qué hara después si se cumple
+for (i = 2; i < 10; i++) {
+    if(i % 2 == 0) {
+        console.log("Número par");
+    }
+}
+
+-------------------------------------------
+>> 07-for-of.js
+-------------------------------------------
+/* while (x)
+ do (x) while (y)
+ for (x,x+y,x++) */
+
+let animales = ['Chanchito feliz', 'Dragón', 'Perrito'];
+
+// Como se llamaría cada objeto individual del array y luego el array
+for (let animal of animales) {
+    console.log(animal);
+}
+
+// otra forma de hacerlo en un while
+let i = 0;
+while (i < animales.length) {
+    console.log(animales[i])
+    i++;
+}
+
+-------------------------------------------
+>> 08-for-in.js
+-------------------------------------------
+// sirve para iterar las propiedades de un objeto, esto es nuevo
+let user = {
+    id: 1,
+    name: 'Chanchito feliz',
+    age: 25,
+};
+
+// 
+for (let prop in user) {
+    console.log(prop, user[prop]); // Mostrar el nombre del prop y su valor. Para poder mostrar el valor ponemos el array con los [en el cual va la variable del for o una prop especifica]
+}
+
+let animales = ['Chanchito feliz', 'Dragón', 'Canguro'];
+for (let indice in animales) { // es mejor hacer esto
+    console.log(indice, animales[indice]);
+}
+
+-------------------------------------------
+>> 09-break-continue.js
+-------------------------------------------
+// break para el codigo
+// continue se salta partes del codigo
+// Aqui se muestra con while, se puede con for, for in, for of, do while
+
+let i = 0;
+while (i < 6) {
+    i++;
+    if (i === 2) {
+        continue; // cuando lleguemos aqui, todo lo que este después de este se ignorara y luego empezara otra vez el loop
+    }
+    if(i === 4) {
+        break; // para.
+    }
+    console.log(i);
+}
+
+-------------------------------------------
+>> 10-switch.js
+-------------------------------------------
+// se usa para decirle al codigo, decir donde se vaya dependiendo del valor de una variable
+
+// usa if-else o switch como quieras. Aunque existen librerias que le gustan usar swich como Redux
+
+
+
+let accion = 'listar'
+// la variable que vamos a evaluar
+switch (accion) {
+    // donde caiga en el caso de que ...
+    case 'listar':
+        console.log('Acción de listar');
+        break; // poner break al final de todo o si no se ejecutara el resto
+    case 'guardar':
+        console.log('Acción de guardar');
+        break;
+    default: // opcional, se ejecuta cuando ningun case a la que la variable pueda responder
+        console.log('Acción no reconocida');
+}
+

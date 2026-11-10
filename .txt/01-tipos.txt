@@ -1,0 +1,151 @@
+=========================================
+  CURSO JAVASCRIPT - TIPOS
+=========================================
+
+
+-------------------------------------------
+>> 01-variables.js
+-------------------------------------------
+
+let nombre = "Hola mundo"; // Variable, para definir una variable poner let
+
+let NombreCompleto; // Tipos de convenciones
+let nombreCompleto;
+let nombre_completo;
+
+console.log(nombre); //un print
+
+let apellido;
+let animal;
+
+apellido = "Schurmann"; // se puede volver a definir después
+
+// poner vars con nombres que se noten (osea NO x, y, abc, n1)
+
+-------------------------------------------
+>> 02-primitivos.js
+-------------------------------------------
+// Espacio en RAM definido y no extendible. Rapido para encontrar
+
+let numero = 1; // Number
+let texto = "Hola mundo"; // String
+let verdadero = true; // Boolean
+let noDefinido; // undefined (let sin valor)
+let undef = undefined // aqui se puede definir
+let nulo = null; // esto tiene que tener un valor pero es nulo
+
+-------------------------------------------
+>> 03-constantes.js
+-------------------------------------------
+// Los let pueden cambiar de valor mas adelante, los const no pueden cambiar
+const nombre = "Hola mundo"; // La mayoria de veces utilizar
+nombre = "Chanchito feliz"; // Cuando se tenga que cambiar utilizar let
+
+console.log(nombre);
+
+-------------------------------------------
+>> 04-tipado-dinamico.js
+-------------------------------------------
+let numero = 42;
+let nombre = "Hola mundo";
+let verdadero = true;
+let undef;
+let nula = null;
+// nombre = 53; // sin let o const antes para cambiar de valor
+console.log(typeof numero); // typeof pregunta el tipo de var
+console.log(typeof nombre);
+console.log(typeof verdadero);
+console.log(typeof undef);
+console.log(typeof nula);
+/* Type de Null solo es null. Si poner typeof devuelve object
+En la primera implementacion de JS, Sus valores estaban representados. El tipo de tag para objetos era 0, null era representado como el NULL pointer (0x00 en plataformas), Normalmente null tenia 0 como tag y por eso null devuelve object. */
+
+-------------------------------------------
+>> 05-comentarios.js
+-------------------------------------------
+// esto es un comentario de una línea
+
+/*
+Forma clásica
+*/
+
+/**
+ * escribir //**
+ * y vscode completa
+ * con /** */ 
+let numero = 42; // otro comentario
+
+console.log(numero); // escribir comentarios para la razon y objetivo de cierta parte del código
+
+-------------------------------------------
+>> 06-objeto.js
+-------------------------------------------
+// Personaje de TV
+let nombre = "Luffy";
+let anime = "One Piece";
+let edad = "19";
+
+let personaje = {
+    nombre : "Luffy", // par llave-valor
+    anime : "One Piece",
+    edad : "17",
+}; // objeto literal
+console.log(personaje);
+console.log(personaje.nombre); // visualizar una propiedad
+console.log(personaje['anime']); // otra forma de visualizar una propiedad
+
+personaje.edad = 19; // cambiar una propiedad 
+
+personaje['edad'] = 16 // otra forma
+
+delete personaje.anime // eliminar una propiedad
+
+console.log(personaje);
+
+-------------------------------------------
+>> 07-array.js
+-------------------------------------------
+// Array o arreglo viene de la palabra collection
+
+let animales = ["chanchito", "caballo"] // Array literal. Se puede dejar vacio o poner valores de inmediatos. Respeta el orden no como los objetos
+
+console.log(animales);
+console.log(animales[0]); // acceder al elemento n
+animales[2] = "Dragón"; // agregar a un arreglo
+console.log(animales);
+
+animales[10] = "Pez"; // no hacer, deja espacios vacios
+console.log(animales[7]); // devuelve undefined si se returna un espacio vacio
+console.log(typeof animales); // Los arrays son objects
+console.log(animales.length);
+
+-------------------------------------------
+>> 08-funciones.js
+-------------------------------------------
+// Las funciones son algoritmos
+function saludar() { // creamos la funcion
+    console.log("Hola mundo");
+}
+
+saludar(); // como llamar una clase en Java para ejecutar
+
+function suma() {
+    return 2 + 2; // return como en Java
+}
+
+let resultado = suma(); // la variable resultado vale la ejecución de la funcion de suma
+// console.log(resultado); \
+//                          - devuelven lo mismo
+console.log(suma());   //  /
+
+-------------------------------------------
+>> 09-argumentos.js
+-------------------------------------------
+function suma(a, b /** un parametro */) {
+    console.log(arguments); //todos los argumentos en un Array no recomendado
+    return a + b;
+}
+
+let resultado = suma(5, 6, 1, 2, 3); // se pone el valor del parametro (argumento)
+console.log(resultado);
+console.log(typeof suma);

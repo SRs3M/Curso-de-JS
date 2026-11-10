@@ -1,0 +1,245 @@
+=========================================
+  CURSO JAVASCRIPT - EJERCICIOS
+=========================================
+
+
+-------------------------------------------
+>> Ejercicio 01.js
+-------------------------------------------
+function cualEsMayor(a, b) {
+    // if(a > b){
+    //     return a;
+    // } else if(a < b){
+    //     return b;
+    // }
+
+    return (a > b) ? a : b;
+}
+
+let mayor = cualEsMayor(10, 5);
+
+console.log(mayor)
+
+-------------------------------------------
+>> Ejercicio 02.js
+-------------------------------------------
+/**
+ * Nombre: ancho · alto
+ * 8K   7680 x 4320
+ * 4K   3040 x 2160
+ * WQHD 2560 x 1440
+ * FHD  1920 x 1080
+ * HD   1280 x 720
+ */
+
+function nombreResolucion(ancho, alto) {
+        if(ancho >= 1280 || alto >= 720) {
+            return "HD";
+        } else if(ancho >= 1920 && alto >= 1080) {
+            return "FHD";
+        } else if(ancho >= 2560 && alto >= 1440) {
+            return "WQHD";
+        } else if(ancho >= 3040 && alto >= 2160) {
+            return "4K";
+        } else if(ancho >= 7680 && alto >= 4320) {
+            return "8K";
+        } else if(ancho >= 13000 && alto >= 7000) {
+            return "HDFHDWQHD4K8K16K32K64K128K256K512K1024K2048K4096K8192K16192KHDHDHDHDHDHD++++++++++"
+        } else {
+            return false;
+        }
+}
+
+let nombre = nombreResolucion(1336, 768);
+console.log(nombre);
+
+-------------------------------------------
+>> Ejercicio 03.js
+-------------------------------------------
+/**
+ * indice validar que no sea menor a cero y que el elemento exista en el array
+ */
+function getbyIdx(Array, idx) {
+    if(idx < 0 || Array.length <= idx) {
+        return "El indice es invalido";
+    }
+    
+    return Array[idx];
+}
+
+let resultado = getbyIdx([1, 2], 3);
+console.log(resultado);
+
+
+-------------------------------------------
+>> Ejercicio 04.js
+-------------------------------------------
+// Crear algoritmo que imprima numeros impares
+
+for(i = 1; i <= 10; i++) {
+    if(i % 2 !== 0) {
+        console.log("Impar", i);
+    }
+}
+
+
+-------------------------------------------
+>> Ejercicio 05.js
+-------------------------------------------
+// Crear un algoritmo que devuelva el numero menor y mayor de un array
+
+let array = [2, 5, 7, 15, -5, -100, 55];
+
+function getMenorMayor(arr) {
+    let menor = arr[0];
+    let mayor = arr[0];
+    for (numero of arr) {
+        menor = menor < numero ? menor : numero;
+        mayor = mayor > numero ? mayor : numero;
+    }
+    return [menor, mayor];
+}
+
+let numeros = getMenorMayor(array);
+console.log(numeros);
+
+-------------------------------------------
+>> Ejercicio 06.js
+-------------------------------------------
+// Crear un algoritmo que devuelva la cantidad de numeros positivos en un array
+
+let array = [2, 5, 7, 15, -5, -100, 55];
+
+function cuantosPositivos(arr){
+    let positivos = [];
+    i = 0;
+    for(item of arr){
+        if(item > 0){
+           positivos[i] = item;
+           i++
+          }
+    }
+    return positivos;
+}
+
+let resultado = cuantosPositivos(array);
+console.log(resultado);
+
+-------------------------------------------
+>> Ejercicio 07.js
+-------------------------------------------
+/**
+ * Crear algoritmo que devuelva
+ * el precio de un producto
+ * más el IVA
+ */
+
+function precioCompleto(precio, impuesto) {
+    impuesto *= precio;
+    return precio + impuesto;
+}
+
+let resultado = precioCompleto(19.90, 0.15);
+console.log(resultado);
+
+
+-------------------------------------------
+>> Ejercicio 08.js
+-------------------------------------------
+/**
+ * crear algoritmo que tome un array de objeto 
+ * y devuelva un array de pares
+ */
+let array = [{
+    id: 1,
+    name: "Nicolas",
+}, {
+    id: 2,
+    name: "Felipe",
+}, {
+    id: 3,
+    name: "Chanchito",
+}];
+
+let pares = [
+    [1, {id: 1, name: "Nicolas"}],
+    [2, {id: 2, name: "Felipe"}],
+    [3, {id: 3, name: "Chanchito"}],
+];
+
+function toPairs(arr) {
+    let pairs = [];
+    for(let idx in arr) {
+        let elemento = arr[idx];
+        pairs[idx] = [elemento.id, elemento]
+    }
+    return pairs;
+}
+
+let resultado = toPairs(array);
+console.log(resultado);
+
+-------------------------------------------
+>> Ejercicio 09.js
+-------------------------------------------
+/**
+ * crear algoritmo que tome un array pares
+ * y devuelva un array de objetos
+*/
+let pares = [
+    [1, { name: "Nicolas"}],
+    [2, { name: "Felipe"}],
+    [3, { name: "Chanchito"}],
+];
+
+let array = [{
+    id: 1,
+    name: "Nicolas",
+}, {
+    id: 2,
+    name: "Felipe",
+}, {
+    id: 3,
+    name: "Chanchito",
+}];
+
+
+function toCollection(arr) {
+    let collection = [];
+    i = 0;
+    for(prop in arr){
+        let elemento = arr[prop];
+        collection[prop] = elemento[1];
+        collection[prop].id = elemento[0];
+    }
+    return collection;
+}
+
+
+let resultado = toCollection(pares);
+console.log(resultado);
+
+-------------------------------------------
+>> Ejercicio 10.js
+-------------------------------------------
+/**
+ * crear un array de longitud n, y que sus elementos sean 
+ * numeros desde el 1 hasta n
+ */
+
+let longitud = 7;
+
+function crearArray(n) {
+    let arr = [];
+    if(n <= 0){
+        return "oe no se vale :(";
+    } else {
+        for(i = 0; i < n; i++){
+            arr[i] = 1 + i;
+        }
+    }
+    return arr;
+}
+
+let resultado = crearArray(longitud);
+console.log(resultado);
